@@ -1,0 +1,61 @@
+@import "bootstrap_variables";
+@import "bootstrap";
+@import "module_variables";
+@import "module/module";
+
+#header {
+  background: #D2E3E1;
+  padding: 30px 50px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+  #header-logo {
+    font-size: 2.8rem;
+    &, a {
+      color: rgba(#000, 0.8);
+    }
+  }
+}
+
+#container {
+  @include container();
+  margin-top: 50px;
+}
+
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px 7px 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: 12px;
+    margin: -7px -7px 0;
+    background-color: #c00;
+    color: #fff;
+  }
+
+  ul li {
+    font-size: 12px;
+    list-style: square;
+  }
+}
+
+.form-check-label {
+  margin-left: 5px;
+}
+
+.form-actions input[type=submit] {
+  @extend .btn-danger
+}

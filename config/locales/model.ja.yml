@@ -1,0 +1,6 @@
+---
+ja:
+  activerecord:
+    attributes:
+      test:
+        name: title

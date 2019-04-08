@@ -1,0 +1,17 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title RailsAssignmentEc2
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    #wrapper
+      %header#header
+        %p#header-logo= link_to('Rails Application', root_path)
+        - if user_signed_in?
+          %p= link_to "ログアウト", destroy_user_session_path, method: :delete
+      #container
+        = yield
