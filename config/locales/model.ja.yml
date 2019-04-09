@@ -2,5 +2,7 @@
 ja:
   activerecord:
     attributes:
-      test:
-        name: title
+      user:
+        post: 郵便番号
+        tel: 電話番号
+        address: 住所
