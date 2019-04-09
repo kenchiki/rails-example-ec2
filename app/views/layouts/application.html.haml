@@ -11,9 +11,14 @@
     #wrapper
       %header#header
         %p#header-logo= link_to('さくらマーケット', root_path)
-        #header-nav
+        %ul#header-nav
           - if user_signed_in?
-            %p= link_to '配送情報変更', edit_my_user_path
-            %p= link_to "ログアウト", destroy_user_session_path, method: :delete
+            - if current_user.admin?
+              %li.dropdown
+                = link_to '管理者用', '#', {class: 'dropdown-toggle', 'data-toggle': 'dropdown'}
+                .dropdown-menu
+                  = link_to '商品一覧', admin_products_path
+            %li= link_to '配送情報変更', edit_my_user_path
+            %li= link_to "ログアウト", destroy_user_session_path, method: :delete
       #container
         = yield
