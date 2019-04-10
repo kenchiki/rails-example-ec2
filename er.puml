@@ -68,7 +68,7 @@ cart--{cart_product
 deliver_price--{order
 product--{cart_product
 cash_on_deliver--{order
-user--{cart
+user--{order
 order--{order_detail
 product--{order_detail
 
