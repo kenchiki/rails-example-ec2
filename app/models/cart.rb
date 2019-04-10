@@ -1,4 +1,5 @@
 class Cart < ApplicationRecord
+  has_many :cart_products, dependent: :destroy
   SESSION_KEY = :cart_id
 
   def self.session_or_create(session)
@@ -7,7 +8,7 @@ class Cart < ApplicationRecord
   end
 
   def self.create_empty(session)
-    create do |cart|
+    create.tap do |cart|
       session[SESSION_KEY] = cart.id
     end
   end

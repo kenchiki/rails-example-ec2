@@ -1,0 +1,19 @@
+%h1 カート
+
+%table.table
+  %thead
+    %tr
+      %th 商品名
+      %th 個数
+      %th
+      %th
+      %th
+
+  %tbody
+    - @cart_products.each do |cart_product|
+      %tr
+        %td= cart_product.name
+        %td= cart_product.quantity
+        %td= link_to 'Show', cart_product
+        %td= link_to 'Edit', edit_product_cart_product_path(cart_product.product, cart_product)
+        %td= link_to 'Destroy', cart_product, method: :delete, data: { confirm: 'Are you sure?' }

@@ -4,9 +4,13 @@
   %thead
     %tr
       %th id
+      %th 商品名
       %th
+      %th カートに入れる
   %tbody
     - @products.each do |product|
       %tr
         %td= product.id
+        %td= product.name
         %td= link_to 'Show', product
+        %td= link_to 'カートに入れる', new_product_cart_product_path(product)
