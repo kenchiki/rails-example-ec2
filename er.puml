@@ -9,24 +9,21 @@ entity "user" {
   address
 }
 
-entity "cash_on_deliver" {
+entity "cash_on_delivery_detail" {
   price
   more_than
 }
 
-entity "cash_on_deliver_term" {
-  began_at
+entity "cash_on_delivery" {
 }
 
-entity "deliver_price" {
+entity "delivery_price" {
   price
   fee
-  began_at
 }
 
 entity "tax" {
   rate
-  began_at
 }
 
 entity "cart" {
@@ -42,10 +39,11 @@ entity "order" {
   post
   tel
   address
-  cash_on_deliver
-  deliver_price
+  cash_on_delivery
+  delivery_price
   tax_price
   total
+  total_without_tax
 }
 
 entity "order_detail" {
@@ -62,12 +60,12 @@ entity "product" {
   position
 }
 
-cash_on_deliver_term--{cash_on_deliver
+cash_on_delivery--{cash_on_delivery_detail
 tax--{order
 cart--{cart_product
-deliver_price--{order
+delivery_price--{order
 product--{cart_product
-cash_on_deliver--{order
+cash_on_delivery--{order
 user--{order
 order--{order_detail
 product--{order_detail
