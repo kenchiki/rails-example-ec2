@@ -1,0 +1,12 @@
+%h1 商品一覧
+
+%table.table
+  %thead
+    %tr
+      %th id
+      %th
+  %tbody
+    - @products.each do |product|
+      %tr
+        %td= product.id
+        %td= link_to 'Show', product
