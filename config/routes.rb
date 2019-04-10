@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :products
     resource :tax, only: %i[new create]
+    resource :delivery_price, only: %i[new create]
   end
 
   resources :cart_products, only: %i[index]

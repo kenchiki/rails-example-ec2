@@ -23,10 +23,12 @@
     justify-content: flex-end;
     & > * {
       margin-left: 15px;
-      font-size: 1.4rem;
       &:first-child {
         margin-left: 0;
       }
+    }
+    & > *, .dropdown-item {
+      font-size: 1.4rem;
     }
   }
 }
@@ -65,10 +67,15 @@
   }
 }
 
+h1 {
+  margin-bottom: 20px;
+}
+
 .form-check-label {
   margin-left: 5px;
 }
 
 .form-actions input[type=submit] {
-  @extend .btn-danger
+  @extend .btn-danger;
+  margin-top: 20px;
 }
