@@ -3,6 +3,10 @@
 @import "module_variables";
 @import "module/module";
 
+#wrapper {
+  padding-bottom: 50px;
+}
+
 #header {
   &, a {
     color: rgba(#000, 0.8);
@@ -78,4 +82,16 @@ h1 {
 .form-actions input[type=submit] {
   @extend .btn-danger;
   margin-top: 20px;
+}
+
+.form-inputs {
+  margin-top: 20px;
+}
+
+.remove_fields {
+  @extend .btn, .btn-secondary;
+}
+
+.add_fields {
+  @extend .btn, .btn-primary;
 }

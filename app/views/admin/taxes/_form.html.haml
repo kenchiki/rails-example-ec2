@@ -4,7 +4,7 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs
-    = f.input :rate, as: :append_text, input_html: {type: 'number'}, append: '%'
+    = f.input :rate, input_html: {type: 'number'}, as: :append_text, append: '%'
 
   .form-actions
     = f.button :submit
