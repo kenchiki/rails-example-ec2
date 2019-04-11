@@ -42,8 +42,8 @@ entity "order" {
   cash_on_delivery
   delivery_price
   tax_price
-  total
   total_without_tax
+  total_with_tax
 }
 
 entity "order_detail" {
