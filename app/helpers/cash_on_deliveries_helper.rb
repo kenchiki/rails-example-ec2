@@ -1,0 +1,2 @@
+module CashOnDeliveriesHelper
+end

@@ -1,4 +1,4 @@
-class Admin::DeliveryPricesController < ApplicationController
+class Admin::DeliveryPricesController < Admin::AdministratorController
   def new
     @delivery_price = DeliveryPrice.order(id: :desc).first_or_initialize
   end

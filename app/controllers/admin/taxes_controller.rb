@@ -1,4 +1,4 @@
-class Admin::TaxesController < ApplicationController
+class Admin::TaxesController < Admin::AdministratorController
   def new
     @tax = Tax.order(id: :desc).first_or_initialize
   end

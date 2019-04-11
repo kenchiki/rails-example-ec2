@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :products
     resource :tax, only: %i[new create]
     resource :delivery_price, only: %i[new create]
+    resource :cash_on_delivery, only: %i[new create]
   end
 
   resources :cart_products, only: %i[index]

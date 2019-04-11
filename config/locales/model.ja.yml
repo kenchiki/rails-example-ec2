@@ -17,3 +17,6 @@ ja:
         description: 商品説明
         image: 商品イメージ
         published: 公開状態
+      cash_on_delivery_detail:
+        price: 代引き価格
+        more_than: 購入金額以上

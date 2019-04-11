@@ -74,6 +74,7 @@ GEM
       mime-types (>= 1.16)
     childprocess (0.9.0)
       ffi (~> 1.0, >= 1.0.11)
+    cocoon (1.2.12)
     code_analyzer (0.4.8)
       sexp_processor
     concurrent-ruby (1.1.5)
@@ -342,6 +343,7 @@ DEPENDENCIES
   byebug
   capybara
   carrierwave (~> 1.0)
+  cocoon
   devise
   dotenv-rails
   factory_bot_rails (~> 4.11.1)

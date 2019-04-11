@@ -17,6 +17,7 @@
               %li.dropdown
                 = link_to '管理者用', '#', {class: 'dropdown-toggle', 'data-toggle': 'dropdown'}
                 .dropdown-menu
+                  = link_to '代引き手数料変更', new_admin_cash_on_delivery_path, class: 'dropdown-item'
                   = link_to '送料変更', new_admin_delivery_price_path, class: 'dropdown-item'
                   = link_to '税率変更', new_admin_tax_path, class: 'dropdown-item'
                   = link_to '商品一覧', admin_products_path, class: 'dropdown-item'
