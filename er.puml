@@ -4,6 +4,7 @@ entity "user" {
   email
   password
   admin
+  name
   post
   tel
   address
