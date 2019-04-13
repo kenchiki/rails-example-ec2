@@ -3,6 +3,7 @@ ja:
   activerecord:
     attributes:
       user:
+        name: ユーザー名
         post: 郵便番号
         tel: 電話番号
         address: 住所

@@ -1,0 +1,22 @@
+
+%table.table.table-striped
+  %tbody
+    %tr
+      %th.w-25 ID
+      %td= @user.id
+    %tr
+      %th= t_model('user.name')
+      %td= @user.name
+    %tr
+      %th= t_model('user.post')
+      %td= @user.post
+    %tr
+      %th= t_model('user.tel')
+      %td= @user.tel
+    %tr
+      %th= t_model('user.address')
+      %td= @user.address
+
+= link_to '編集', edit_admin_user_path(@user), class: 'btn btn-primary'
+\|
+= link_to 'ユーザー一覧管理', admin_users_path, class: 'btn btn-primary'

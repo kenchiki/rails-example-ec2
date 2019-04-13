@@ -1,0 +1,19 @@
+%h1 ユーザー一覧管理
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th ID
+      %th= t_model('user.name')
+      %th
+      %th
+      %th
+
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.id
+        %td= user.name
+        %td= link_to '詳細', [:admin, user]
+        %td= link_to '編集', edit_admin_user_path(user)
+        %td= link_to '削除', [:admin, user], method: :delete, data: { confirm: 'Are you sure?' }

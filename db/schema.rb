@@ -52,11 +52,11 @@ ActiveRecord::Schema.define(version: 2019_04_11_001441) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "image"
-    t.integer "price"
+    t.integer "price", null: false
     t.text "description"
-    t.boolean "published"
+    t.boolean "published", default: true, null: false
     t.integer "position"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -79,6 +79,7 @@ ActiveRecord::Schema.define(version: 2019_04_11_001441) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.boolean "admin", default: false, null: false
+    t.string "name"
     t.string "post"
     t.string "tel"
     t.string "address"
