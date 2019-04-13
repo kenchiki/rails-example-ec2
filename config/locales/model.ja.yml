@@ -20,4 +20,6 @@ ja:
         published: 公開状態
       cash_on_delivery_detail:
         price: 代引き価格
-        more_than: 購入金額以上
+        more_than: 購入金額
+      cart_product:
+        quantity: 個数

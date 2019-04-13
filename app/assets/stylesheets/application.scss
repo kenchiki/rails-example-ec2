@@ -107,3 +107,12 @@ h1 {
 .add_fields {
   @extend .btn, .btn-primary;
 }
+
+.btns {
+  .btn {
+    margin-left: 10px;
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

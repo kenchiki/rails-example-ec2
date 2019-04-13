@@ -1,20 +1,25 @@
 %h1 商品一覧管理
 
-%table.table
+%table.table.table-striped
   %thead
     %tr
       %th ID
-      %th
-      %th
+      %th.w-25= t_model('product.image')
+      %th.w-25= t_model('product.name')
       %th
 
   %tbody
     - @products.each do |product|
       %tr
         %td= product.id
-        %td= link_to 'Show', [:admin, product]
-        %td= link_to 'Edit', edit_admin_product_path(product)
-        %td= link_to 'Destroy', [:admin, product], method: :delete, data: { confirm: 'Are you sure?' }
+        %td
+          = image_tag product.image.url, class: 'w-100' if product.image?
+          = image_tag 'no_image.png', class: 'w-100' unless product.image?
+        %td= product.name
+        %td.btns
+          = link_to '詳細', [:admin, product], class: 'btn btn-primary'
+          = link_to '編集', edit_admin_product_path(product), class: 'btn btn-primary'
+          = link_to '削除', [:admin, product], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 
 %br
 
