@@ -17,7 +17,9 @@
           = image_tag 'no_image.png', class: 'w-100' unless product.image?
         %td
           = product.name
-          %div
+          .mt-1
+          = "#{product.price}円"
+          .mt-1
             - if product.published
               %span.badge.badge-success 公開
             - else

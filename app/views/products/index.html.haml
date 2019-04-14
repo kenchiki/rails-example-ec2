@@ -13,7 +13,10 @@
         %td
           = image_tag product.image.url, class: 'w-100' if product.image?
           = image_tag 'no_image.png', class: 'w-100' unless product.image?
-        %td= product.name
+        %td
+          = product.name
+          .mt-1
+            = "#{product.price}円"
         %td= simple_format(product.description)
         %td.btns
           = link_to '詳細', new_product_cart_product_path(product), class: 'btn btn-primary'

@@ -20,7 +20,7 @@ entity "cash_on_delivery" {
 
 entity "delivery_price" {
   price
-  fee
+  per
 }
 
 entity "tax" {

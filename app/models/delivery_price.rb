@@ -1,3 +1,3 @@
 class DeliveryPrice < ApplicationRecord
-  validates :price, :fee, presence: true
+  validates :price, :per, presence: true
 end

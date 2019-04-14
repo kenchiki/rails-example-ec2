@@ -1,6 +1,6 @@
 class CartProductsController < ApplicationController
   before_action :set_product, only: %i[new create]
-  before_action :set_cart_product, only: %i[show edit update destroy]
+  before_action :set_cart_product, only: %i[edit update destroy]
 
   def index
     @cart_products = current_cart.cart_products.order(created_at: :desc)
