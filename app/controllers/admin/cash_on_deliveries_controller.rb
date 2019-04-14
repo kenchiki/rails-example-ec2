@@ -7,7 +7,7 @@ class Admin::CashOnDeliveriesController < Admin::AdministratorController
     @cash_on_delivery = CashOnDelivery.new(cash_on_delivery_params)
 
     if @cash_on_delivery.save
-      redirect_to new_admin_cash_on_delivery_path, notice: 'Cash on delivery was successfully created.'
+      redirect_to new_admin_cash_on_delivery_path, notice: '代引き手数料を編集しました。'
     else
       render :new
     end

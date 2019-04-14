@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :products
+    resources :products do
+      member do
+        put :sort_up, :sort_down, :sort_top, :sort_bottom
+      end
+    end
     resource :tax, only: %i[new create]
     resource :delivery_price, only: %i[new create]
     resource :cash_on_delivery, only: %i[new create]

@@ -1,6 +1,6 @@
 %h1 カート
 
-%table.table
+%table.table.table-striped
   %thead
     %tr
       %th.w-25 商品名
@@ -14,4 +14,4 @@
         %td.btns
           = link_to '詳細', cart_product, class: 'btn btn-primary'
           = link_to '編集', edit_product_cart_product_path(cart_product.product, cart_product), class: 'btn btn-primary'
-          = link_to '削除', cart_product, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+          = link_to '削除', cart_product, method: :delete, data: { confirm: '本当に実行しますか？' }, class: 'btn btn-danger'

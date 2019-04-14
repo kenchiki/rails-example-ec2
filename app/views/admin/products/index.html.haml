@@ -15,12 +15,27 @@
         %td
           = image_tag product.image.url, class: 'w-100' if product.image?
           = image_tag 'no_image.png', class: 'w-100' unless product.image?
-        %td= product.name
-        %td.btns
-          = link_to '詳細', [:admin, product], class: 'btn btn-primary'
-          = link_to '編集', edit_admin_product_path(product), class: 'btn btn-primary'
-          = link_to '削除', [:admin, product], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-
+        %td
+          = product.name
+          %div
+            - if product.published
+              %span.badge.badge-success 公開
+            - else
+              %span.badge.badge-secondary 非公開
+        %td
+          .btns
+            = link_to '詳細', [:admin, product], class: 'btn btn-primary'
+            = link_to '編集', edit_admin_product_path(product), class: 'btn btn-primary'
+            = link_to '削除', [:admin, product], method: :delete, data: { confirm: '本当に実行しますか？' }, class: 'btn btn-danger'
+          .btns.mt-3
+            = link_to '一つ上へ', sort_up_admin_product_path(product), method: :put, class: 'btn btn-primary btn-sm'
+            = link_to '一つ下へ', sort_down_admin_product_path(product), method: :put, class: 'btn btn-primary btn-sm'
+            = link_to '一番上へ', sort_top_admin_product_path(product), method: :put, class: 'btn btn-primary btn-sm',
+            data: { confirm: '本当に実行しますか？' }
+            = link_to '一番下へ', sort_bottom_admin_product_path(product), method: :put, class: 'btn btn-primary btn-sm',
+          data: { confirm: '本当に実行しますか？' }
 %br
 
 = link_to '商品追加', new_admin_product_path, class: 'btn btn-primary'
+
+= paginate @products

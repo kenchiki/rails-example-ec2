@@ -21,7 +21,7 @@ class CartProductsController < ApplicationController
     @cart_product.cart = current_cart
 
     if @cart_product.save
-      redirect_to cart_products_path, notice: 'Cart product was successfully created.'
+      redirect_to cart_products_path, notice: 'カートの商品を追加しました。'
     else
       render :new
     end
@@ -29,7 +29,7 @@ class CartProductsController < ApplicationController
 
   def update
     if @cart_product.update(cart_product_params)
-      redirect_to [@cart_product], notice: 'Cart product was successfully updated.'
+      redirect_to cart_products_url, notice: 'カートの商品を編集しました。'
     else
       render :edit
     end
@@ -37,7 +37,7 @@ class CartProductsController < ApplicationController
 
   def destroy
     @cart_product.destroy!
-    redirect_to cart_products_url, notice: 'Cart product was successfully destroyed.'
+    redirect_to cart_products_url, notice: 'カートの商品を削除しました。'
   end
 
   private

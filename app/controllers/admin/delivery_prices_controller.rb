@@ -7,7 +7,7 @@ class Admin::DeliveryPricesController < Admin::AdministratorController
     @delivery_price = DeliveryPrice.new(delivery_price_params)
 
     if @delivery_price.save
-      redirect_to new_admin_delivery_price_path, notice: 'Delivery price was successfully created.'
+      redirect_to new_admin_delivery_price_path, notice: '送料を編集しました。'
     else
       render :new
     end

@@ -7,7 +7,7 @@ class My::UsersController < ApplicationController
   def update
     respond_to do |format|
       if @user.update(user_params)
-        format.html { redirect_to edit_my_user_path, notice: 'User was successfully updated.' }
+        format.html { redirect_to edit_my_user_path, notice: '配送情報を編集しました。' }
       else
         format.html { render :edit }
       end
