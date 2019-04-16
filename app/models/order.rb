@@ -9,6 +9,7 @@ class Order < ApplicationRecord
   delegate :calc_total_without_tax, :calc_total_with_tax, :calc_products_price, :calc_products_quantity,
            :calc_tax_price, :calc_delivery_price, :calc_cash_on_delivery, to: :price_calculation
   before_validation :set_relations, :set_params, :build_order_details
+  after_create :send_mail
 
   def set_relations
     self.tax = Tax.order(id: :asc).last
@@ -35,5 +36,10 @@ class Order < ApplicationRecord
 
   def price_calculation
     PriceCalculation.new(cash_on_delivery, delivery_price, tax, order_details)
+  end
+
+  def send_mail
+    OrderMailer.with(order: self).user_thanks.deliver_later
+    OrderMailer.with(order: self).notify_admin.deliver_later
   end
 end

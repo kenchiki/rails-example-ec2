@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resource :cash_on_delivery, only: %i[new create]
     resource :delivery_time, only: %i[new create]
     resources :users, only: %i[index show edit update destroy]
+    resources :orders, only: %i[index show]
   end
 
   resources :cart_products, only: %i[index]
