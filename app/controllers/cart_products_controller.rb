@@ -1,9 +1,10 @@
 class CartProductsController < ApplicationController
   before_action :set_product, only: %i[new create]
   before_action :set_cart_product, only: %i[edit update destroy]
+  skip_before_action :authenticate_user!
 
   def index
-    @cart_products = current_cart.cart_products.order(created_at: :desc)
+    @cart_products = current_cart.cart_products.order(id: :desc)
   end
 
   def show

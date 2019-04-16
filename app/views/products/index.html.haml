@@ -16,7 +16,7 @@
         %td
           = product.name
           .mt-1
-            = "#{product.price}円"
+            = price_unit(product.price)
         %td= simple_format(product.description)
         %td.btns
           = link_to '詳細', new_product_cart_product_path(product), class: 'btn btn-primary'

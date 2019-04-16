@@ -5,12 +5,10 @@ class My::UsersController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to edit_my_user_path, notice: '配送情報を編集しました。' }
-      else
-        format.html { render :edit }
-      end
+    if @user.update(user_params)
+      redirect_to edit_my_user_path, notice: '配送情報を編集しました。'
+    else
+      render :edit
     end
   end
 
@@ -21,6 +19,6 @@ class My::UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:name, :post, :tel, :address)
+    params.require(:user).permit(:full_name, :post, :tel, :address)
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_11_001441) do
+ActiveRecord::Schema.define(version: 2019_04_15_004236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,53 @@ ActiveRecord::Schema.define(version: 2019_04_11_001441) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "delivery_time_details", force: :cascade do |t|
+    t.string "time"
+    t.bigint "delivery_time_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["delivery_time_id"], name: "index_delivery_time_details_on_delivery_time_id"
+  end
+
+  create_table "delivery_times", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_details", force: :cascade do |t|
+    t.integer "price"
+    t.integer "quantity"
+    t.bigint "order_id"
+    t.bigint "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_details_on_order_id"
+    t.index ["product_id"], name: "index_order_details_on_product_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.date "delivery_date"
+    t.string "full_name"
+    t.string "post"
+    t.string "tel"
+    t.string "address"
+    t.integer "total_with_tax"
+    t.bigint "cash_on_delivery_id"
+    t.bigint "delivery_price_id"
+    t.bigint "tax_id"
+    t.bigint "user_id"
+    t.bigint "delivery_time_detail_id"
+    t.bigint "cart_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "index_orders_on_cart_id"
+    t.index ["cash_on_delivery_id"], name: "index_orders_on_cash_on_delivery_id"
+    t.index ["delivery_price_id"], name: "index_orders_on_delivery_price_id"
+    t.index ["delivery_time_detail_id"], name: "index_orders_on_delivery_time_detail_id"
+    t.index ["tax_id"], name: "index_orders_on_tax_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name", null: false
     t.string "image"
@@ -79,7 +126,7 @@ ActiveRecord::Schema.define(version: 2019_04_11_001441) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.boolean "admin", default: false, null: false
-    t.string "name"
+    t.string "full_name"
     t.string "post"
     t.string "tel"
     t.string "address"
@@ -93,4 +140,13 @@ ActiveRecord::Schema.define(version: 2019_04_11_001441) do
   add_foreign_key "cart_products", "carts"
   add_foreign_key "cart_products", "products"
   add_foreign_key "cash_on_delivery_details", "cash_on_deliveries"
+  add_foreign_key "delivery_time_details", "delivery_times"
+  add_foreign_key "order_details", "orders"
+  add_foreign_key "order_details", "products"
+  add_foreign_key "orders", "carts"
+  add_foreign_key "orders", "cash_on_deliveries"
+  add_foreign_key "orders", "delivery_prices"
+  add_foreign_key "orders", "delivery_time_details"
+  add_foreign_key "orders", "taxes"
+  add_foreign_key "orders", "users"
 end

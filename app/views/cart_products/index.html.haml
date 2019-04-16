@@ -1,39 +1,27 @@
 %h1 カート
 
-%table.table.table-striped
-  %thead
-    %tr
-      %th.w-25= t_model('product.name')
-      %th.w-25= t_model('product.price')
-      %th.w-25= t_model('cart_product.quantity')
-      %th
-  %tbody
-    - @cart_products.each do |cart_product|
+- if @cart_products.empty?
+  %p カートは空です。
+
+- else
+  %table.table.table-striped
+    %thead
       %tr
-        %td= cart_product.name
-        %td= "#{cart_product.price}円"
-        %td= cart_product.quantity
-        %td.btns
-          = link_to '詳細', cart_product, class: 'btn btn-primary'
-          = link_to '編集', edit_product_cart_product_path(cart_product.product, cart_product), class: 'btn btn-primary'
-          = link_to '削除', cart_product, method: :delete, data: { confirm: '本当に実行しますか？' }, class: 'btn btn-danger'
+        %th.w-25= t_model('product.name')
+        %th.w-25= t_model('product.price')
+        %th.w-25= t_model('cart_product.quantity')
+        %th
+    %tbody
+      - @cart_products.each do |cart_product|
+        %tr
+          %td= cart_product.name
+          %td= price_unit(cart_product.price)
+          %td= cart_product.quantity
+          %td.btns
+            = link_to '詳細', cart_product, class: 'btn btn-primary'
+            = link_to '編集', edit_product_cart_product_path(cart_product.product, cart_product), class: 'btn btn-primary'
+            = link_to '削除', cart_product, method: :delete, data: { confirm: '本当に実行しますか？' }, class: 'btn btn-danger'
 
-%h2 合計
+  = render 'layouts/cart_total'
 
-%table.table.table-striped
-  %tbody
-    %tr
-      %th.w-25 送料
-      %td= "#{current_cart.delivery_price}円"
-    %tr
-      %th 代引き手数料
-      %td= "#{current_cart.cash_on_delivery}円"
-    %tr
-      %th 合計（税抜き）
-      %td= "#{current_cart.total_without_tax}円"
-    %tr
-      %th 消費税
-      %td= "#{current_cart.tax_price}円"
-    %tr
-      %th 合計（税込）
-      %td= "#{current_cart.total_with_tax}円"
+  = link_to '注文確認に進む', new_my_order_path, class: 'btn btn-primary'

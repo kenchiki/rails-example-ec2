@@ -7,10 +7,6 @@ class CartProduct < ApplicationRecord
   before_create :sum_quantity, :adjust_quantity
   before_update :adjust_quantity
 
-  def subtotal
-    product.price * quantity
-  end
-
   private
 
   def sum_quantity

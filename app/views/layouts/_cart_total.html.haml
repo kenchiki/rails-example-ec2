@@ -1,0 +1,22 @@
+%h2 合計
+
+%table.table.table-striped
+  %tbody
+    %tr
+      %th.w-25 商品合計
+      %td= price_unit(current_cart.calc_products_price)
+    %tr
+      %th 送料
+      %td= price_unit(current_cart.calc_delivery_price)
+    %tr
+      %th 代引き手数料
+      %td= price_unit(current_cart.calc_cash_on_delivery)
+    %tr
+      %th 合計（税抜き）
+      %td= price_unit(current_cart.calc_total_without_tax)
+    %tr
+      %th 消費税
+      %td= price_unit(current_cart.calc_tax_price)
+    %tr
+      %th 合計（税込）
+      %td= price_unit(current_cart.calc_total_with_tax)

@@ -1,2 +1,0 @@
-module Admin::DeliveryPricesHelper
-end

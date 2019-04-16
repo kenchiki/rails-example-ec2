@@ -18,7 +18,7 @@
         %td
           = product.name
           .mt-1
-          = "#{product.price}円"
+          = price_unit(product.price)
           .mt-1
             - if product.published
               %span.badge.badge-success 公開

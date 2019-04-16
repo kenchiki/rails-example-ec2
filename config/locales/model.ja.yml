@@ -3,7 +3,7 @@ ja:
   activerecord:
     attributes:
       user:
-        name: ユーザー名
+        full_name: 氏名
         post: 郵便番号
         tel: 電話番号
         address: 住所
@@ -23,3 +23,8 @@ ja:
         more_than: 購入金額
       cart_product:
         quantity: 個数
+      delivery_time_detail:
+        time: 希望時間
+      order:
+        delivery_time_detail_id: 配送希望時間
+        delivery_date: 配送希望日

@@ -35,8 +35,8 @@ entity "cart_product" {
 }
 
 entity "order" {
-  deliver_time
-  deliver_date
+  delivery_time
+  delivery_date
   post
   tel
   address
@@ -50,6 +50,10 @@ entity "order" {
 entity "order_detail" {
   price
   quantity
+}
+
+entity "delivery_time_detail" {
+  time
 }
 
 entity "product" {
@@ -69,6 +73,9 @@ product--{cart_product
 cash_on_delivery--{order
 user--{order
 order--{order_detail
+delivery_time_detail--{order
+delivery_time--{delivery_time_detail
 product--{order_detail
+cart--{order
 
 @enduml
