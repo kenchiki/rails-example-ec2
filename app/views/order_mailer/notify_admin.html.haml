@@ -1,6 +1,5 @@
 %h1 下記の注文がありました。
 
-%p
-%p= link_to "注文詳細(ID:#{@order.id})", admin_order_url(@order)
+%p= link_to "注文詳細(ID:#{@order.id})", [:admin, @order]
 
 %p さくらマーケット
