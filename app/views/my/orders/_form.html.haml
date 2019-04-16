@@ -11,8 +11,8 @@
   %tbody
     - current_cart.cart_products.each do |cart_product|
       %tr
-        %td= cart_product.name
-        %td= price_unit(cart_product.price)
+        %td= cart_product.product.name
+        %td= price_unit(cart_product.product.price)
         %td= cart_product.quantity
 
 = render 'layouts/cart_total'

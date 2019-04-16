@@ -17,7 +17,7 @@ class PriceCalculation
   end
 
   def calc_products_price
-    @calc_products_price ||= @cart_products.sum { |cart_product| cart_product.price * cart_product.quantity }
+    @calc_products_price ||= @cart_products.sum { |cart_product| cart_product.product.price * cart_product.quantity }
   end
 
   def calc_products_quantity

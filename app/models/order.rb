@@ -28,7 +28,7 @@ class Order < ApplicationRecord
   def build_order_details
     cart.cart_products.each do |cart_product|
       order_detail = order_details.build
-      order_detail.price = cart_product.price
+      order_detail.price = cart_product.product.price
       order_detail.quantity = cart_product.quantity
       order_detail.product = cart_product.product
     end

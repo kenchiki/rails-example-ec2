@@ -1,7 +1,6 @@
 class CartProduct < ApplicationRecord
   belongs_to :cart
   belongs_to :product
-  delegate :name, :price, to: :product
   MAX_QUANTITY = 20
 
   before_create :sum_quantity, :adjust_quantity
