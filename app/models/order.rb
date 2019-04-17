@@ -18,11 +18,9 @@ class Order < ApplicationRecord
   end
 
   def set_params
-    self.full_name = user.full_name
-    self.post = user.post
-    self.tel = user.tel
-    self.address = user.address
-    self.total_with_tax = cart.calc_total_with_tax
+    assign_attributes(
+      full_name: user.full_name, post: user.post, tel: user.tel, address: user.address, total_with_tax: cart.calc_total_with_tax
+    )
   end
 
   def build_order_details
