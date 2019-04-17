@@ -2,8 +2,8 @@ class Cart < ApplicationRecord
   has_many :cart_products, dependent: :destroy
   has_many :orders, dependent: :destroy
   SESSION_KEY = :cart_id
-  delegate :calc_total_without_tax, :calc_total_with_tax, :calc_products_price, :calc_products_quantity,
-           :calc_tax_price, :calc_delivery_price, :calc_cash_on_delivery, to: :price_calculation
+  delegate :total_without_tax, :total_with_tax, :products_price, :products_quantity,
+           :tax_price, :delivery_price, :cash_on_delivery, to: :price_calculation, prefix: :calc
 
   def self.session_or_create(session)
     cart = find_by(id: session[SESSION_KEY])

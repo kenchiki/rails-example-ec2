@@ -6,8 +6,8 @@ class Order < ApplicationRecord
   belongs_to :cart
   belongs_to :delivery_time_detail
   has_many :order_details, dependent: :destroy
-  delegate :calc_total_without_tax, :calc_total_with_tax, :calc_products_price, :calc_products_quantity,
-           :calc_tax_price, :calc_delivery_price, :calc_cash_on_delivery, to: :price_calculation
+  delegate :total_without_tax, :total_with_tax, :products_price, :products_quantity,
+           :tax_price, :delivery_price, :cash_on_delivery, to: :price_calculation, prefix: :calc
   before_validation :set_relations, :set_params, :build_order_details
   after_create :send_mail
 
