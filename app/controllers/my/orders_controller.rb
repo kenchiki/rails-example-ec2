@@ -19,7 +19,7 @@ class My::OrdersController < ApplicationController
 
     if @order.save
       new_cart
-      redirect_to [:my, @order], notice: '注文が完了しました。'
+      redirect_to [:my, @order], notice: '注文が完了しました'
     else
       render :new
     end

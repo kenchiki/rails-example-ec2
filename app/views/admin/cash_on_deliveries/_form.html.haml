@@ -1,6 +1,5 @@
 -# frozen_string_literal: true
 = simple_form_for([:admin, @cash_on_delivery], url: admin_cash_on_delivery_path, method: :post) do |f|
-  = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   = f.simple_fields_for :cash_on_delivery_details do |cash_on_delivery_detail|

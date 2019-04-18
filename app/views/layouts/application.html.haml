@@ -16,7 +16,7 @@
           %li= link_to 'カート', cart_products_path
           - if user_signed_in?
             %li= link_to '注文一覧', my_orders_path
-            %li= link_to '配送情報編集', edit_my_user_path
+            %li= link_to '配送情報編集', new_my_shipping_address_path
             - if current_user.admin?
               %li.dropdown
                 = link_to '管理者用', '#', {class: 'dropdown-toggle', 'data-toggle': 'dropdown'}

@@ -3,10 +3,7 @@ ja:
   activerecord:
     attributes:
       user:
-        full_name: 氏名
-        post: 郵便番号
-        tel: 電話番号
-        address: 住所
+        email: メールアドレス
       tax:
         rate: 税率
       delivery_price:
@@ -18,6 +15,7 @@ ja:
         description: 商品説明
         image: 商品イメージ
         published: 公開状態
+        order_details: 注文
       cash_on_delivery_detail:
         price: 代引き価格
         more_than: 購入金額
@@ -28,3 +26,8 @@ ja:
       order:
         delivery_time_detail_id: 配送希望時間
         delivery_date: 配送希望日
+      shipping_address:
+        full_name: 氏名
+        post: 郵便番号
+        tel: 電話番号
+        address: 住所

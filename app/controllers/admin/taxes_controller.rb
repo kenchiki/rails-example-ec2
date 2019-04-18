@@ -7,7 +7,7 @@ class Admin::TaxesController < Admin::AdministratorController
     @tax = Tax.new(tax_params)
 
     if @tax.save
-      redirect_to new_admin_tax_path, notice: '税率を編集しました。'
+      redirect_to new_admin_tax_path, notice: '税率を編集しました'
     else
       render :new
     end

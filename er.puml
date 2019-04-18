@@ -4,10 +4,6 @@ entity "user" {
   email
   password
   admin
-  name
-  post
-  tel
-  address
 }
 
 entity "cash_on_delivery_detail" {
@@ -37,13 +33,6 @@ entity "cart_product" {
 entity "order" {
   delivery_time
   delivery_date
-  post
-  tel
-  address
-  cash_on_delivery
-  delivery_price
-  tax_price
-  total_without_tax
   total_with_tax
 }
 
@@ -65,6 +54,13 @@ entity "product" {
   position
 }
 
+entity "shipping_address" {
+  full_name
+  post
+  tel
+  address
+}
+
 cash_on_delivery--{cash_on_delivery_detail
 tax--{order
 cart--{cart_product
@@ -77,5 +73,7 @@ delivery_time_detail--{order
 delivery_time--{delivery_time_detail
 product--{order_detail
 cart--{order
+user--{shipping_address
+order--{shipping_address
 
 @enduml

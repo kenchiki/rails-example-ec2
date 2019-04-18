@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :delivery_price do
-    price { 1 }
-    fee { 1 }
+    price { 600 }
+    per { 5 }
   end
 end

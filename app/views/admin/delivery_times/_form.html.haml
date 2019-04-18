@@ -1,6 +1,5 @@
 -# frozen_string_literal: true
 = simple_form_for([:admin, @delivery_time], url: admin_delivery_time_path, method: :post) do |f|
-  = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   = f.simple_fields_for :delivery_time_details do |delivery_time_detail|

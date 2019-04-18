@@ -19,7 +19,7 @@ class Admin::ProductsController < Admin::AdministratorController
     @product = Product.new(product_params)
 
     if @product.save
-      redirect_to [:admin, @product], notice: '商品を追加しました。'
+      redirect_to [:admin, @product], notice: '商品を追加しました'
     else
       render :new
     end
@@ -27,35 +27,38 @@ class Admin::ProductsController < Admin::AdministratorController
 
   def update
     if @product.update(product_params)
-      redirect_to [:admin, @product], notice: '商品を編集しました。'
+      redirect_to [:admin, @product], notice: '商品を編集しました'
     else
       render :edit
     end
   end
 
   def destroy
-    @product.destroy
-    redirect_to admin_products_url, notice: '商品を削除しました。'
+    if @product.destroy
+      redirect_to admin_products_url, notice: '商品を削除しました'
+    else
+      redirect_to admin_products_url, alert: @product.errors[:base].to_sentence
+    end
   end
 
   def sort_up
     @product.move_higher
-    redirect_to admin_products_url, notice: '商品を一つ上に移動しました。'
+    redirect_to admin_products_url, notice: '商品を一つ上に移動しました'
   end
 
   def sort_down
     @product.move_lower
-    redirect_to admin_products_url, notice: '商品を一つ下に移動しました。'
+    redirect_to admin_products_url, notice: '商品を一つ下に移動しました'
   end
 
   def sort_top
     @product.move_to_top
-    redirect_to admin_products_url, notice: '商品を一番上に移動しました。'
+    redirect_to admin_products_url, notice: '商品を一番上に移動しました'
   end
 
   def sort_bottom
     @product.move_to_bottom
-    redirect_to admin_products_url, notice: '商品を一番下に移動しました。'
+    redirect_to admin_products_url, notice: '商品を一番下に移動しました'
   end
 
   private

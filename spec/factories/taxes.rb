@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :tax do
-    rate { "9.99" }
+    rate { 8 }
   end
 end

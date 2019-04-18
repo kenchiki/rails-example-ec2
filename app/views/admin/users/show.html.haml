@@ -1,20 +1,23 @@
 
-%table.table.table-striped
+%table.table.table-striped{'data-test': 'users__show'}
   %tbody
     %tr
       %th.w-25 ID
       %td= @user.id
     %tr
-      %th= t_model('user.name')
-      %td= @user.name
+      %th= t_model('user.email')
+      %td= @user.email
     %tr
-      %th= t_model('user.post')
+      %th= t_model('shipping_address.full_name')
+      %td= @user.full_name
+    %tr
+      %th= t_model('shipping_address.post')
       %td= @user.post
     %tr
-      %th= t_model('user.tel')
+      %th= t_model('shipping_address.tel')
       %td= @user.tel
     %tr
-      %th= t_model('user.address')
+      %th= t_model('shipping_address.address')
       %td= @user.address
 
 = link_to '編集', edit_admin_user_path(@user), class: 'btn btn-primary'

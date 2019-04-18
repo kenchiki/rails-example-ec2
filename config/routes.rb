@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   namespace :my do
-    resource :user, only: %i[edit update]
+    resource :shipping_address, only: %i[new create]
     resources :orders
   end
 

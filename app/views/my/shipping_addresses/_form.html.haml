@@ -1,6 +1,5 @@
 -# frozen_string_literal: true
-= simple_form_for([:my, @user], url: my_user_path) do |f|
-  = f.error_notification
+= simple_form_for([:my,@shipping_address], url: my_shipping_address_path, method: :post) do |f|
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
   .form-inputs

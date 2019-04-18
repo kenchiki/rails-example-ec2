@@ -7,7 +7,7 @@ class Admin::DeliveryPricesController < Admin::AdministratorController
     @delivery_price = DeliveryPrice.new(delivery_price_params)
 
     if @delivery_price.save
-      redirect_to new_admin_delivery_price_path, notice: '送料を編集しました。'
+      redirect_to new_admin_delivery_price_path, notice: '送料を編集しました'
     else
       render :new
     end
@@ -16,6 +16,6 @@ class Admin::DeliveryPricesController < Admin::AdministratorController
   private
 
   def delivery_price_params
-    params.require(:delivery_price).permit(:price, :fee)
+    params.require(:delivery_price).permit(:price, :per)
   end
 end
