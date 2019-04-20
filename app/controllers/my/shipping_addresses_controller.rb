@@ -1,5 +1,4 @@
 class My::ShippingAddressesController < ApplicationController
-
   def new
     @shipping_address = current_user.shipping_addresses.order(id: :desc).first_or_initialize
   end

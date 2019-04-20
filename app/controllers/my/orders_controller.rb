@@ -36,9 +36,8 @@ class My::OrdersController < ApplicationController
   end
 
   def require_delivery_info
-    requires = %i[full_name post tel address]
-    if current_user.nil? || requires.any? { |require| current_user.public_send(require).nil? }
-      redirect_to edit_my_user_path, alert: '配送情報を入力してください'
+    unless current_user.last_shipping_address
+      redirect_to new_my_shipping_address_path, alert: '配送情報を入力してください'
     end
   end
 end

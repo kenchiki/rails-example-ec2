@@ -4,6 +4,10 @@ ja:
     attributes:
       user:
         email: メールアドレス
+        password: パスワード
+        password_confirmation: パスワード確認用
+        current_password: 現在のパスワード
+        remember_me: ログイン情報を記憶する
       tax:
         rate: 税率
       delivery_price:

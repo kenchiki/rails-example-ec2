@@ -5,7 +5,7 @@ describe 'admin/orders', type: :system do
     sign_in FactoryBot.create(:user, :with_admin)
   end
 
-  it '#index（一覧にユーザーの注文が表示される）' do
+  it '#index（一覧に全ユーザーの注文が表示される）' do
     order = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_deliver_info))
     order2 = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_deliver_info))
 

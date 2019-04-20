@@ -46,7 +46,7 @@ describe 'admin/products', type: :system do
     end.to change(Product, :count).by(-1)
   end
 
-  describe '並び替えができること' do
+  describe '並び替えができる' do
     let!(:product1) { FactoryBot.create(:product, name: 'product1') }
     let!(:product2) { FactoryBot.create(:product, name: 'product2') }
     let!(:product3) { FactoryBot.create(:product, name: 'product3') }
@@ -55,7 +55,7 @@ describe 'admin/products', type: :system do
       visit admin_products_path
 
       expect do
-        find("[href='#{sort_up_admin_product_path(product2)}']").click
+        find_link(href: sort_up_admin_product_path(product2)).click
         expect(find('#flash')).to have_content '商品を一つ上に移動しました'
       end.to change {
         Product.order(position: :asc).to_a
@@ -66,7 +66,7 @@ describe 'admin/products', type: :system do
       visit admin_products_path
 
       expect do
-        find("[href='#{sort_down_admin_product_path(product3)}']").click
+        find_link(href: sort_down_admin_product_path(product3)).click
         expect(find('#flash')).to have_content '商品を一つ下に移動しました'
       end.to change {
         Product.order(position: :asc).to_a
@@ -78,7 +78,7 @@ describe 'admin/products', type: :system do
 
       expect do
         accept_confirm do
-          find("[href='#{sort_top_admin_product_path(product1)}']").click
+          find_link(href: sort_top_admin_product_path(product1)).click
         end
         expect(find('#flash')).to have_content '商品を一番上に移動しました'
       end.to change {
@@ -91,7 +91,7 @@ describe 'admin/products', type: :system do
 
       expect do
         accept_confirm do
-          find("[href='#{sort_bottom_admin_product_path(product3)}']").click
+          find_link(href: sort_bottom_admin_product_path(product3)).click
         end
         expect(find('#flash')).to have_content '商品を一番下に移動しました'
       end.to change {

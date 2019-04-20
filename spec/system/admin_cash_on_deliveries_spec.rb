@@ -10,15 +10,15 @@ describe 'admin/cash_on_deliveries', type: :system do
     ])
   end
 
-  describe '#create（代引き手数料を編集できる）' do
+  describe '#create' do
     it '入力項目追加して登録できる' do
       visit new_admin_cash_on_delivery_path
 
       click_on '入力項目を追加'
-      form = find('.edit_cash_on_delivery')
-      form.all("[name$='[price]']").last.set('500')
-      form.all("[name$='[more_than]']").last.set('20000')
-      form.find("[type='submit']").click
+      all("[name$='[price]']").last.set('500')
+      all("[name$='[more_than]']").last.set('20000')
+      click_on('更新する')
+
       expect(find('#flash')).to have_content '代引き手数料を編集しました'
 
       cash_on_delivery = CashOnDelivery.order(id: :asc).last
@@ -30,9 +30,9 @@ describe 'admin/cash_on_deliveries', type: :system do
     it '入力項目削除して登録できる' do
       visit new_admin_cash_on_delivery_path
 
-      form = find('.edit_cash_on_delivery')
-      form.all('.remove_fields').last.click
-      form.find("[type='submit']").click
+      all('.remove_fields').last.click
+      click_on('更新する')
+
       expect(find('#flash')).to have_content '代引き手数料を編集しました'
 
       cash_on_delivery = CashOnDelivery.order(id: :asc).last
@@ -42,13 +42,13 @@ describe 'admin/cash_on_deliveries', type: :system do
       expect(cash_on_delivery_detail.more_than).to eq 0
     end
 
-    it '購入金額が0円の入寮項目がない場合、エラーメッセージが表示される' do
+    it '購入金額が0円の入力項目がない場合、エラーメッセージが表示される' do
       visit new_admin_cash_on_delivery_path
 
-      form = find('.edit_cash_on_delivery')
-      form.all('.remove_fields').last.click
-      form.all('.remove_fields').last.click
-      form.find("[type='submit']").click
+      all('.remove_fields').last.click
+      all('.remove_fields').last.click
+      click_on('更新する')
+
       expect(find('.alert-danger')).to have_content '購入金額が0円を一つ含む必要があります'
     end
   end
