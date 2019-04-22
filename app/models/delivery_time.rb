@@ -1,5 +1,6 @@
 class DeliveryTime < ApplicationRecord
   has_many :delivery_time_details, dependent: :destroy
+
   accepts_nested_attributes_for :delivery_time_details, allow_destroy: true, reject_if: :all_blank
 
   validate ->(delivery_time) {

@@ -75,17 +75,21 @@ h1, h2 {
   margin-bottom: 20px;
 }
 
+.alert {
+  margin-bottom: 20px;
+}
+
 .form-check-label {
   margin-left: 5px;
 }
 
-.form-actions input[type=submit] {
-  @extend .btn-danger;
-  margin-top: 20px;
-}
 
 .form-actions {
-  margin-bottom: 20px;
+  margin-top: 20px;
+  input[type=submit] {
+    @extend .btn-danger;
+
+  }
 }
 
 .form-inputs {
@@ -93,12 +97,10 @@ h1, h2 {
 }
 
 .table {
-  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
-.alert {
-  margin-bottom: 20px;
-}
+
 
 .remove_fields {
   @extend .btn, .btn-secondary;
@@ -109,6 +111,7 @@ h1, h2 {
 }
 
 .btns {
+  margin-top: 20px;
   .btn {
     margin-left: 5px;
     &:first-child {
@@ -119,4 +122,5 @@ h1, h2 {
 
 .pagination {
   justify-content: center;
+  margin-top: 20px;
 }

@@ -1,5 +1,8 @@
 %h1 商品一覧管理
 
+= link_to '商品追加', new_admin_product_path, class: 'btn btn-primary'
+
+
 %table.table.table-striped
   %thead
     %tr
@@ -36,8 +39,5 @@
             data: { confirm: '本当に実行しますか？' }
             = link_to '一番下へ', sort_bottom_admin_product_path(product), method: :put, class: 'btn btn-primary btn-sm',
           data: { confirm: '本当に実行しますか？' }
-%br
-
-= link_to '商品追加', new_admin_product_path, class: 'btn btn-primary'
 
 = paginate @products

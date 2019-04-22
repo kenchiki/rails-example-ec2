@@ -6,10 +6,15 @@ class Order < ApplicationRecord
   belongs_to :cart
   belongs_to :delivery_time_detail
   has_many :order_details, dependent: :destroy
-  delegate :total_without_tax, :total_with_tax, :products_price, :products_quantity,
-           :tax_price, :delivery_price, :cash_on_delivery, to: :price_calculation, prefix: :calc
+
+  delegate :total_without_tax, :total_with_tax, :products_price,
+           :products_quantity, :tax_price, :delivery_price, :cash_on_delivery,
+           to: :price_calculation, prefix: :calc
+
   before_validation :set_relations, :set_params, :build_order_details
   after_create :send_mail
+
+  private
 
   def set_relations
     self.tax = Tax.order(id: :asc).last
@@ -19,7 +24,11 @@ class Order < ApplicationRecord
 
   def set_params
     assign_attributes(
-      full_name: user.full_name, post: user.post, tel: user.tel, address: user.address, total_with_tax: cart.calc_total_with_tax
+      full_name: user.full_name,
+      post: user.post,
+      tel: user.tel,
+      address: user.address,
+      total_with_tax: cart.calc_total_with_tax
     )
   end
 
@@ -32,12 +41,12 @@ class Order < ApplicationRecord
     end
   end
 
-  def price_calculation
-    PriceCalculation.new(cash_on_delivery, delivery_price, tax, order_details)
-  end
-
   def send_mail
     OrderMailer.with(order: self).user_thanks.deliver_later
     OrderMailer.with(order: self).notify_admin.deliver_later
+  end
+
+  def price_calculation
+    PriceCalculation.new(cash_on_delivery, delivery_price, tax, order_details)
   end
 end

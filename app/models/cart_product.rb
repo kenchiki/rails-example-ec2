@@ -1,7 +1,10 @@
 class CartProduct < ApplicationRecord
   belongs_to :cart
   belongs_to :product
+
   MAX_QUANTITY = 20
+
+  validates :quantity, presence: true
 
   before_create :sum_quantity, :adjust_quantity
   before_update :adjust_quantity
@@ -9,12 +12,13 @@ class CartProduct < ApplicationRecord
   private
 
   def sum_quantity
-    return unless product.cart_products.exists?
+    cart_products = cart.cart_products.where(product: product)
+    return unless cart_products.exists?
 
-    sum = product.cart_products.pluck(:quantity).sum
+    sum = cart_products.pluck(:quantity).sum
     self.quantity += sum
-    product.cart_products.destroy_all
-    raise '商品の個数をまとめられませんでした' unless product.cart_products.all?(&:destroyed?)
+    cart_products.destroy_all
+    raise '商品の個数をまとめられませんでした' unless cart_products.all?(&:destroyed?)
   end
 
   def adjust_quantity

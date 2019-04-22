@@ -15,14 +15,16 @@ describe 'my/orders', type: :system do
     )
   end
 
-  it '#index（注文一覧に自分の注文のみが表示される）' do
-    my_order = FactoryBot.create(:order, user: user)
-    other_user_order = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_deliver_info))
+  describe '#index' do
+    it '注文一覧に自分の注文のみが表示される' do
+      my_order = FactoryBot.create(:order, user: user)
+      other_user_order = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_deliver_info))
 
-    visit my_orders_path
-    table = find(:test, 'orders__index')
-    expect(table).to have_link '注文詳細', href: my_order_path(my_order)
-    expect(table).to have_no_link '注文詳細', href: my_order_path(other_user_order)
+      visit my_orders_path
+      table = find(:test, 'orders__index')
+      expect(table).to have_link '注文詳細', href: my_order_path(my_order)
+      expect(table).to have_no_link '注文詳細', href: my_order_path(other_user_order)
+    end
   end
 
   describe '#show' do

@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :cart_products
   root 'products#index'
 
   devise_for :users
@@ -15,6 +14,7 @@ Rails.application.routes.draw do
         put :sort_up, :sort_down, :sort_top, :sort_bottom
       end
     end
+
     resource :tax, only: %i[new create]
     resource :delivery_price, only: %i[new create]
     resource :cash_on_delivery, only: %i[new create]

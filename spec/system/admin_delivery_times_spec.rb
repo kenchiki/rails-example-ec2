@@ -13,7 +13,7 @@ describe 'admin/delivery_times', type: :system do
 
       click_on '入力項目を追加'
       all("[name$='[time]']").last.set('14時〜16時')
-      click_button('更新する')
+      click_on('更新する')
 
       expect(find('#flash')).to have_content '配送希望時間を編集しました'
 
@@ -26,7 +26,7 @@ describe 'admin/delivery_times', type: :system do
       visit new_admin_delivery_time_path
 
       all('.remove_fields').last.click
-      click_button('更新する')
+      click_on('更新する')
       expect(find('#flash')).to have_content '配送希望時間を編集しました'
 
       delivery_time = DeliveryTime.order(id: :asc).last
@@ -40,7 +40,7 @@ describe 'admin/delivery_times', type: :system do
 
       all('.remove_fields').last.click
       all('.remove_fields').last.click
-      click_button('更新する')
+      click_on('更新する')
 
       expect(find('.alert-danger')).to have_content '配送時間は一つ以上入力が必要です'
     end

@@ -49,7 +49,7 @@ describe 'admin/cash_on_deliveries', type: :system do
       all('.remove_fields').last.click
       click_on('更新する')
 
-      expect(find('.alert-danger')).to have_content '購入金額が0円を一つ含む必要があります'
+      expect(find('.alert-danger')).to have_content '購入金額0円以上を一つ含む必要があります'
     end
   end
 end
