@@ -4,7 +4,7 @@ FactoryBot.define do
     password { 'testtest' }
     confirmed_at { Time.current }
 
-    trait :with_deliver_info do
+    trait :with_delivery_info do
       after(:build) do |user|
         user.shipping_addresses << FactoryBot.build(:shipping_address)
       end

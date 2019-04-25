@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe '注文', type: :system do
   let!(:product) { FactoryBot.create(:product) }
-  let(:user) { FactoryBot.create(:user, :with_deliver_info) }
+  let(:user) { FactoryBot.create(:user, :with_delivery_info) }
 
   before do
     sign_in user

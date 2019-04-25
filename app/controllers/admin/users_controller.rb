@@ -9,12 +9,14 @@ class Admin::UsersController < Admin::AdministratorController
   end
 
   def edit
+    @shipping_address = @user.last_shipping_address || @user.shipping_addresses.build
   end
 
   def update
     if @user.update(user_params)
       redirect_to [:admin, @user], notice: 'ユーザーを編集しました'
     else
+      @shipping_address = @user.shipping_addresses.last
       render :edit
     end
   end
@@ -31,6 +33,6 @@ class Admin::UsersController < Admin::AdministratorController
   end
 
   def user_params
-    params.require(:user).permit(:email)
+    params.require(:user).permit(:email, shipping_addresses_attributes: %i[full_name post tel address])
   end
 end

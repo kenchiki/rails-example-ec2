@@ -18,7 +18,7 @@ describe 'my/orders', type: :system do
   describe '#index' do
     it '注文一覧に自分の注文のみが表示される' do
       my_order = FactoryBot.create(:order, user: user)
-      other_user_order = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_deliver_info))
+      other_user_order = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_delivery_info))
 
       visit my_orders_path
       table = find(:test, 'orders__index')
@@ -45,7 +45,7 @@ describe 'my/orders', type: :system do
     end
 
     it '他のユーザーの注文詳細は表示できない' do
-      other_user_order = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_deliver_info))
+      other_user_order = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_delivery_info))
 
       visit my_order_path(other_user_order)
 

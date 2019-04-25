@@ -7,8 +7,8 @@ describe 'admin/orders', type: :system do
 
   describe '#index' do
     it '一覧に全ユーザーの注文が表示される' do
-      order = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_deliver_info))
-      order2 = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_deliver_info))
+      order = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_delivery_info))
+      order2 = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_delivery_info))
 
       visit admin_orders_path
       table = find(:test, 'orders__index')

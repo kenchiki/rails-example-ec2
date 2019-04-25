@@ -6,5 +6,18 @@
   .form-inputs
     = f.input :email
 
+  = f.simple_fields_for :shipping_addresses, @shipping_address do |ff|
+    .form-inputs
+      = ff.input :full_name
+
+    .form-inputs
+      = ff.input :post
+
+    .form-inputs
+      = ff.input :tel
+
+    .form-inputs
+      = ff.input :address
+
   .form-actions
     = f.button :submit
