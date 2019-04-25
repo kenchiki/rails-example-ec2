@@ -9,3 +9,5 @@ ja:
   simple_form:
     required:
       html: '<span class="badge badge-danger">必須</span>'
+    error_notification:
+      default_message: '以下の問題を確認してください。'

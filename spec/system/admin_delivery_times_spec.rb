@@ -42,7 +42,7 @@ describe 'admin/delivery_times', type: :system do
       all('.remove_fields').last.click
       click_on('更新する')
 
-      expect(find('.alert-danger')).to have_content '配送時間は一つ以上入力が必要です'
+      expect(find('#container')).to have_content '配送時間は一つ以上入力が必要です'
     end
   end
 end

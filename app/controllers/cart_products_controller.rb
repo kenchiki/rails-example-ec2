@@ -1,5 +1,5 @@
 class CartProductsController < ApplicationController
-  before_action :set_product, only: %i[new create]
+  before_action :set_product, only: %i[new create edit update destroy]
   before_action :set_cart_product, only: %i[edit update destroy]
   skip_before_action :authenticate_user!
 

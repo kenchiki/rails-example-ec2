@@ -12,7 +12,10 @@
     - @users.each do |user|
       %tr
         %td= user.id
-        %td= user.full_name
+        %td
+          = user.full_name
+          - if user.admin
+            %span.badge.badge-success 管理者
         %td= user.email
         %td.btns
           = link_to '詳細', [:admin, user], class: 'btn btn-primary'
