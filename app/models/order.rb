@@ -11,6 +11,13 @@ class Order < ApplicationRecord
            :products_quantity, :tax_price, :delivery_price, :cash_on_delivery,
            to: :price_calculation, prefix: :calc
 
+  validate ->(order) {
+    delivery_date_calculation = DeliveryDateCalculation.new
+    unless delivery_date_calculation.include?(order.delivery_date)
+      errors.add(:delivery_date, 'が正しくありません')
+    end
+  }
+
   before_validation :set_relations, :set_params, :build_order_details
   after_create :send_mail
 
@@ -23,13 +30,7 @@ class Order < ApplicationRecord
   end
 
   def set_params
-    assign_attributes(
-      full_name: user.full_name,
-      post: user.post,
-      tel: user.tel,
-      address: user.address,
-      total_with_tax: cart.calc_total_with_tax
-    )
+    assign_attributes(total_with_tax: cart.calc_total_with_tax)
   end
 
   def build_order_details
@@ -47,6 +48,6 @@ class Order < ApplicationRecord
   end
 
   def price_calculation
-    PriceCalculation.new(cash_on_delivery, delivery_price, tax, order_details)
+    @price_calculation ||= PriceCalculation.new(cash_on_delivery, delivery_price, tax, order_details)
   end
 end

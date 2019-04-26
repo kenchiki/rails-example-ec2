@@ -5,19 +5,6 @@ class DeliveryDateCalculation
   DATE_MAX = 14
   LOOP_MAX = 100
 
-  def calc_dates
-    current_date = Time.current.to_date
-    dates = []
-    date_count = 0
-    LOOP_MAX.times do
-      break if dates.size >= (DATE_MAX - DATE_MIN)
-      dates << current_date if date_addable?(current_date, date_count)
-      current_date = current_date.tomorrow
-      date_count += 1 if date_count < DATE_MIN
-    end
-    dates
-  end
-
   def dates
     @dates ||= calc_dates
   end
@@ -28,8 +15,31 @@ class DeliveryDateCalculation
 
   private
 
-  def date_addable?(current_date, date_count)
-    return false if current_date.sunday? || current_date.saturday? || date_count < DATE_MIN
+  def calc_dates
+    current_date = Time.current.to_date
+    dates = []
+    business_date_count = 0
+    LOOP_MAX.times do
+      if business_date?(current_date)
+        business_date_count += 1
+      end
+
+      break if business_date_count > DATE_MAX
+
+      if business_date_count >= DATE_MIN && business_date_count <= DATE_MAX && business_date?(current_date)
+        dates << current_date
+      end
+
+      current_date = current_date.tomorrow
+    end
+
+    dates
+  end
+
+  def business_date?(date)
+    if date.sunday? || date.saturday?
+      return false
+    end
 
     true
   end

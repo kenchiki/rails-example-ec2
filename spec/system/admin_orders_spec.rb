@@ -6,9 +6,19 @@ describe 'admin/orders', type: :system do
   end
 
   describe '#index' do
+    around do |it|
+      travel_to(Time.zone.local(2018, 1, 1, 0, 0, 0)) do
+        it.run
+      end
+    end
+
     it '一覧に全ユーザーの注文が表示される' do
-      order = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_delivery_info))
-      order2 = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_delivery_info))
+      order = FactoryBot.create(
+        :order, user: FactoryBot.create(:user, :with_delivery_info), delivery_date: '2018-01-03'
+      )
+      order2 = FactoryBot.create(
+        :order, user: FactoryBot.create(:user, :with_delivery_info), delivery_date: '2018-01-03'
+      )
 
       visit admin_orders_path
       table = find(:test, 'orders__index')

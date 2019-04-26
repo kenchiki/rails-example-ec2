@@ -16,9 +16,17 @@ describe 'my/orders', type: :system do
   end
 
   describe '#index' do
+    around do |it|
+      travel_to(Time.zone.local(2018, 1, 1, 0, 0, 0)) do
+        it.run
+      end
+    end
+
     it '注文一覧に自分の注文のみが表示される' do
-      my_order = FactoryBot.create(:order, user: user)
-      other_user_order = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_delivery_info))
+      my_order = FactoryBot.create(:order, user: user, delivery_date: '2018-01-03')
+      other_user_order = FactoryBot.create(
+        :order, user: FactoryBot.create(:user, :with_delivery_info), delivery_date: '2018-01-03'
+      )
 
       visit my_orders_path
       table = find(:test, 'orders__index')
@@ -30,8 +38,14 @@ describe 'my/orders', type: :system do
   describe '#show' do
     include_context :show_exceptions
 
+    around do |it|
+      travel_to(Time.zone.local(2018, 1, 1, 0, 0, 0)) do
+        it.run
+      end
+    end
+
     it '自分の注文詳細のみが表示できる' do
-      my_order = FactoryBot.create(:order, user: user)
+      my_order = FactoryBot.create(:order, user: user, delivery_date: '2018-01-03')
 
       visit my_order_path(my_order)
 
@@ -45,7 +59,9 @@ describe 'my/orders', type: :system do
     end
 
     it '他のユーザーの注文詳細は表示できない' do
-      other_user_order = FactoryBot.create(:order, user: FactoryBot.create(:user, :with_delivery_info))
+      other_user_order = FactoryBot.create(
+        :order, user: FactoryBot.create(:user, :with_delivery_info), delivery_date: '2018-01-03'
+      )
 
       visit my_order_path(other_user_order)
 
