@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   namespace :my do
     resource :shipping_address, only: %i[new create]
-    resources :orders
+    resources :orders, only: %i[index show new create]
   end
 
   namespace :admin do

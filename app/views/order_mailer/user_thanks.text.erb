@@ -1,0 +1,37 @@
+<%= @order.user.full_name %> 様
+
+ご注文ありがとうございます。
+下記の内容で承りました。
+
+-------------------------------
+
+○商品
+<% @order.order_details.order(id: :desc).each do |order_detail| %>
+  <%= t_model('product.name') %>：<%= order_detail.product.name %>
+  <%= t_model('product.price') %>：<%= price_unit(order_detail.price) %>
+  <%= t_model('cart_product.quantity') %>：<%= order_detail.quantity %>
+
+<% end %>
+-------------------------------
+
+○配送情報
+  <%= t_model('order.delivery_date') %>：<%= l(@order.delivery_date, format: :long) %>
+  <%= t_model('order.delivery_time_detail_id') %>：<%= @order.delivery_time_detail.time %>
+  <%= t_model('shipping_address.full_name') %>：<%= @order.user.full_name %>
+  <%= t_model('shipping_address.post') %>：<%= @order.user.post %>
+  <%= t_model('shipping_address.tel') %>：<%= @order.user.tel %>
+  <%= t_model('shipping_address.address') %>：<%= @order.user.address %>
+
+-------------------------------
+
+○合計
+  商品合計：<%= price_unit(@order.calc_products_price) %>
+  送料：<%= price_unit(@order.calc_delivery_price) %>
+  代引き手数料：<%= price_unit(@order.calc_cash_on_delivery) %>
+  合計（税抜き）：<%= price_unit(@order.calc_total_without_tax) %>
+  消費税：<%= price_unit(@order.calc_tax_price) %>
+  合計（税込） <%= price_unit(@order.calc_total_with_tax) %>
+
+-------------------------------
+
+さくらマーケット
