@@ -1,13 +1,11 @@
 class CartProductsController < ApplicationController
   before_action :set_product, only: %i[new create edit update destroy]
   before_action :set_cart_product, only: %i[edit update destroy]
+  before_action :require_published_product, only: %i[new create edit update]
   skip_before_action :authenticate_user!
 
   def index
     @cart_products = current_cart.cart_products.order(id: :desc)
-  end
-
-  def show
   end
 
   def new
@@ -53,5 +51,11 @@ class CartProductsController < ApplicationController
 
   def cart_product_params
     params.require(:cart_product).permit(:quantity)
+  end
+
+  def require_published_product
+    unless @product.published
+      redirect_to products_url, notice: '商品は非公開です'
+    end
   end
 end
