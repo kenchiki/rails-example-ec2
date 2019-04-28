@@ -4,5 +4,6 @@ FactoryBot.define do
     post { '111-1111' }
     tel { '111-1111-1111' }
     address { 'テスト県テスト市テスト町1-1-1' }
+    user { FactoryBot.create(:user) }
   end
 end

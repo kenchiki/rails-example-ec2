@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_20_031439) do
+ActiveRecord::Schema.define(version: 2019_04_15_004236) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,16 +77,13 @@ ActiveRecord::Schema.define(version: 2019_04_20_031439) do
 
   create_table "orders", force: :cascade do |t|
     t.date "delivery_date"
-    t.string "full_name"
-    t.string "post"
-    t.string "tel"
-    t.string "address"
     t.integer "total_with_tax"
     t.bigint "cash_on_delivery_id"
     t.bigint "delivery_price_id"
     t.bigint "tax_id"
     t.bigint "user_id"
     t.bigint "delivery_time_detail_id"
+    t.bigint "shipping_address_id"
     t.bigint "cart_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -94,6 +91,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_031439) do
     t.index ["cash_on_delivery_id"], name: "index_orders_on_cash_on_delivery_id"
     t.index ["delivery_price_id"], name: "index_orders_on_delivery_price_id"
     t.index ["delivery_time_detail_id"], name: "index_orders_on_delivery_time_detail_id"
+    t.index ["shipping_address_id"], name: "index_orders_on_shipping_address_id"
     t.index ["tax_id"], name: "index_orders_on_tax_id"
     t.index ["user_id"], name: "index_orders_on_user_id"
   end
@@ -137,10 +135,6 @@ ActiveRecord::Schema.define(version: 2019_04_20_031439) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.boolean "admin", default: false, null: false
-    t.string "full_name"
-    t.string "post"
-    t.string "tel"
-    t.string "address"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
@@ -158,6 +152,7 @@ ActiveRecord::Schema.define(version: 2019_04_20_031439) do
   add_foreign_key "orders", "cash_on_deliveries"
   add_foreign_key "orders", "delivery_prices"
   add_foreign_key "orders", "delivery_time_details"
+  add_foreign_key "orders", "shipping_addresses"
   add_foreign_key "orders", "taxes"
   add_foreign_key "orders", "users"
   add_foreign_key "shipping_addresses", "users"

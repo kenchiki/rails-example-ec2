@@ -12,6 +12,12 @@ describe 'admin/orders', type: :system do
       end
     end
 
+    before do
+      FactoryBot.create(:tax)
+      FactoryBot.create(:cash_on_delivery)
+      FactoryBot.create(:delivery_price)
+    end
+
     it '一覧に全ユーザーの注文が表示される' do
       order = FactoryBot.create(
         :order, user: FactoryBot.create(:user, :with_delivery_info), delivery_date: '2018-01-03'

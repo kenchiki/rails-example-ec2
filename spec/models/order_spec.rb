@@ -1,7 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe Order, type: :model do
+
   describe '#validates' do
+    before do
+      FactoryBot.create(:tax)
+      FactoryBot.create(:cash_on_delivery)
+      FactoryBot.create(:delivery_price)
+    end
+
     around do |it|
       travel_to(Time.zone.local(2018, 1, 1, 0, 0, 0)) do
         it.run
@@ -58,18 +65,59 @@ RSpec.describe Order, type: :model do
         :cart_product, quantity: 20, product: FactoryBot.create(:product, price: 1001)
       )
 
+      user = FactoryBot.create(:user, :with_delivery_info)
+
       order = Order.create!(
         delivery_date: '2018-01-03',
-        full_name: 'テスト名前',
-        post: '000-0000',
-        tel: '000-0000-0000',
-        address: 'テスト県テスト市テスト町1-1-1',
         delivery_time_detail: DeliveryTimeDetail.order(id: :asc).last,
-        user: FactoryBot.create(:user),
+        user: user,
         cart: cart
       )
 
       expect(order.calc_total_with_tax).to eq 24_645
+    end
+  end
+
+  describe '#sent_mail' do
+    include ActionView::Helpers::NumberHelper
+    include ApplicationHelper
+
+    before do
+      FactoryBot.create(:tax)
+      FactoryBot.create(:cash_on_delivery)
+      FactoryBot.create(:delivery_price)
+    end
+
+    it '注文すると管理者と購入者へメールが送信される' do
+
+      FactoryBot.create(:user, :with_admin, email: 'admin@example.com')
+
+      user = FactoryBot.create(:user, email: 'user@example.com')
+      user.shipping_addresses.create(full_name: 'テスト名前',
+                                     post: '111-1111',
+                                     tel: '222-2222-2222',
+                                     address: 'テスト県テスト市テスト町1-1-1')
+
+      perform_enqueued_jobs do
+        order = FactoryBot.create(:order, user: user)
+        sent_mails = ActionMailer::Base.deliveries.last(2)
+
+        user_sent_mail = sent_mails[0]
+        expect(user_sent_mail.subject).to eq '【さくらマーケット】ご注文ありがとうございます'
+        expect(user_sent_mail.to.first).to eq 'user@example.com'
+        expect(user_sent_mail.from.first).to eq 'from@example.com'
+
+        expect(user_sent_mail.body.raw_source).to include 'テスト名前'
+        expect(user_sent_mail.body.raw_source).to include '111-1111'
+        expect(user_sent_mail.body.raw_source).to include '222-2222-2222'
+        expect(user_sent_mail.body.raw_source).to include 'テスト県テスト市テスト町1-1-1'
+        expect(user_sent_mail.body.raw_source).to include price_unit(order.calc_total_with_tax)
+
+        admin_sent_mail = sent_mails[1]
+        expect(admin_sent_mail.subject).to eq "【さくらマーケット】注文がありました(ID:#{order.id})"
+        expect(admin_sent_mail.to.first).to eq 'admin@example.com'
+        expect(admin_sent_mail.from.first).to eq 'from@example.com'
+      end
     end
   end
 end

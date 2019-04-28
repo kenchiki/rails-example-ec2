@@ -24,16 +24,16 @@
         %td= @order.delivery_time_detail.time
       %tr
         %th= t_model('shipping_address.full_name')
-        %td= @order.user.full_name
+        %td= @order.shipping_address.full_name
       %tr
         %th= t_model('shipping_address.post')
-        %td= @order.user.post
+        %td= @order.shipping_address.post
       %tr
         %th= t_model('shipping_address.tel')
-        %td= @order.user.tel
+        %td= @order.shipping_address.tel
       %tr
         %th= t_model('shipping_address.address')
-        %td= @order.user.address
+        %td= @order.shipping_address.address
 
   %h2 合計
 

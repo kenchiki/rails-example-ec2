@@ -5,6 +5,7 @@ class Order < ApplicationRecord
   belongs_to :user
   belongs_to :cart
   belongs_to :delivery_time_detail
+  belongs_to :shipping_address
   has_many :order_details, dependent: :destroy
 
   delegate :total_without_tax, :total_with_tax, :products_price,
@@ -27,6 +28,7 @@ class Order < ApplicationRecord
     self.tax = Tax.order(id: :asc).last
     self.cash_on_delivery = CashOnDelivery.order(id: :asc).last
     self.delivery_price = DeliveryPrice.order(id: :asc).last
+    self.shipping_address = user.last_shipping_address
   end
 
   def set_params

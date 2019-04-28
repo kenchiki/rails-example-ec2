@@ -22,6 +22,12 @@ describe 'my/orders', type: :system do
       end
     end
 
+    before do
+      FactoryBot.create(:tax)
+      FactoryBot.create(:cash_on_delivery)
+      FactoryBot.create(:delivery_price)
+    end
+
     it '注文一覧に自分の注文のみが表示される' do
       my_order = FactoryBot.create(:order, user: user, delivery_date: '2018-01-03')
       other_user_order = FactoryBot.create(
@@ -44,18 +50,24 @@ describe 'my/orders', type: :system do
       end
     end
 
-    it '自分の注文詳細のみが表示できる' do
-      my_order = FactoryBot.create(:order, user: user, delivery_date: '2018-01-03')
+    before do
+      FactoryBot.create(:tax)
+      FactoryBot.create(:cash_on_delivery)
+      FactoryBot.create(:delivery_price)
+    end
 
-      visit my_order_path(my_order)
+    it '自分の注文詳細のみが表示できる' do
+      order = FactoryBot.create(:order, user: user, delivery_date: '2018-01-03')
+
+      visit my_order_path(order)
 
       expect(page).to have_selector 'h1', text: '注文詳細'
 
-      table = find(:test, 'orders__show')
-      expect(table).to have_content 'テスト名前2'
-      expect(table).to have_content '222-2222'
-      expect(table).to have_content '333-3333-3333'
-      expect(table).to have_content 'テスト県テスト市テスト町2-2-2'
+      target = find(:test, 'orders__show')
+      expect(target).to have_content 'テスト名前2'
+      expect(target).to have_content '222-2222'
+      expect(target).to have_content '333-3333-3333'
+      expect(target).to have_content 'テスト県テスト市テスト町2-2-2'
     end
 
     it '他のユーザーの注文詳細は表示できない' do
@@ -66,6 +78,24 @@ describe 'my/orders', type: :system do
       visit my_order_path(other_user_order)
 
       expect(page).to have_selector 'h1', text: "The page you were looking for doesn't exist."
+    end
+
+    it '注文後、配送情報を変更しても配送情報は注文確定時のものが適用されている' do
+      order = FactoryBot.create(:order, user: user, delivery_date: '2018-01-03')
+      user.shipping_addresses.create!(full_name: 'テスト名前3',
+                                      post: '444-4444',
+                                      tel: '555-5555-5555',
+                                      address: 'テスト県テスト市テスト町3-3-3')
+
+      visit my_order_path(order)
+
+      expect(page).to have_selector 'h1', text: '注文詳細'
+
+      target = find(:test, 'orders__show')
+      expect(target).to have_content 'テスト名前2'
+      expect(target).to have_content '222-2222'
+      expect(target).to have_content '333-3333-3333'
+      expect(target).to have_content 'テスト県テスト市テスト町2-2-2'
     end
   end
 end
