@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe '認証', type: :system do
+describe '認証シナリオ', type: :system do
   it 'サインアップ後、ログインできる' do
     user_attributes = FactoryBot.attributes_for(:user)
 

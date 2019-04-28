@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe '注文', type: :system do
+describe '注文シナリオ', type: :system do
   let!(:product) { FactoryBot.create(:product) }
   let(:user) { FactoryBot.create(:user, :with_delivery_info) }
 
