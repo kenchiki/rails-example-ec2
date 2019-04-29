@@ -37,4 +37,10 @@ AWS_BUCKET
 
 # メールアドレス送信時のFROM
 EMAIL_FROM
+
+# デモadminユーザーパスワード（必要であれば）
+DEMO_ADMIN_USER_PASSWORD
+
+# デモユーザーパスワード（必要であれば）
+DEMO_USER_PASSWORD
 ```
