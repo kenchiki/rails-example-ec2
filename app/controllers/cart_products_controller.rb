@@ -55,7 +55,7 @@ class CartProductsController < ApplicationController
 
   def require_published_product
     unless @product.published
-      redirect_to products_url, notice: '商品は非公開です'
+      redirect_to products_url, alert: '商品は非公開です'
     end
   end
 end
