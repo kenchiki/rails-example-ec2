@@ -16,24 +16,7 @@ class DeliveryDateCalculation
   private
 
   def calc_dates
-    current_date = Time.current.to_date
-    dates = []
-    business_date_count = 0
-    LOOP_MAX.times do
-      if business_date?(current_date)
-        business_date_count += 1
-      end
-
-      break if business_date_count > DATE_MAX
-
-      if business_date_count >= DATE_MIN && business_date_count <= DATE_MAX && business_date?(current_date)
-        dates << current_date
-      end
-
-      current_date = current_date.tomorrow
-    end
-
-    dates
+    add_business_dates([])
   end
 
   def business_date?(date)
@@ -42,5 +25,23 @@ class DeliveryDateCalculation
     end
 
     true
+  end
+
+  def next_business_date(date)
+    tomorrow = date.tomorrow
+    if business_date?(tomorrow)
+      tomorrow
+    else
+      next_business_date(tomorrow)
+    end
+  end
+
+  def add_business_dates(dates)
+    if dates.length < DATE_MAX
+      date = dates.length == 0 ? Time.current.to_date.yesterday : dates.last
+      add_business_dates(dates << next_business_date(date))
+    else
+      dates.slice((DATE_MIN - 1)..DATE_MAX)
+    end
   end
 end
