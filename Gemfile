@@ -22,6 +22,9 @@ gem 'mini_magick'
 gem 'fog-aws'
 gem 'cocoon'
 gem 'acts_as_list'
+gem 'activemerchant'
+gem 'money'
+gem 'offsite_payments'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

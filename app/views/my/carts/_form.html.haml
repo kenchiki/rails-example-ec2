@@ -19,7 +19,7 @@
 
 %h2 配送希望
 
-= simple_form_for([:my, @order]) do |f|
+= simple_form_for([:my, @cart], url: my_cart_path) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
@@ -28,12 +28,6 @@
 
   .form-inputs
     = f.input :delivery_date, as: :select, collection: delivery_dates, include_blank: false
-
-  .form-inputs
-    = f.input :token, as: :hidden
-
-  .form-inputs
-    = f.input :PayerID, as: :hidden
 
   .form-actions
     = f.button :submit

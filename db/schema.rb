@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_15_004236) do
+ActiveRecord::Schema.define(version: 2019_05_22_054202) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,6 +28,9 @@ ActiveRecord::Schema.define(version: 2019_04_15_004236) do
   create_table "carts", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "delivery_date"
+    t.bigint "delivery_time_detail_id"
+    t.index ["delivery_time_detail_id"], name: "index_carts_on_delivery_time_detail_id"
   end
 
   create_table "cash_on_deliveries", force: :cascade do |t|
@@ -144,6 +147,7 @@ ActiveRecord::Schema.define(version: 2019_04_15_004236) do
 
   add_foreign_key "cart_products", "carts"
   add_foreign_key "cart_products", "products"
+  add_foreign_key "carts", "delivery_time_details"
   add_foreign_key "cash_on_delivery_details", "cash_on_deliveries"
   add_foreign_key "delivery_time_details", "delivery_times"
   add_foreign_key "order_details", "orders"

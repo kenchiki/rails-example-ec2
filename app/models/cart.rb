@@ -1,11 +1,20 @@
 class Cart < ApplicationRecord
   has_many :cart_products, dependent: :destroy
   has_many :orders, dependent: :destroy
+  belongs_to :delivery_time_detail, optional: true
 
   SESSION_KEY = :cart_id
   delegate :total_without_tax, :total_with_tax, :products_price,
            :products_quantity, :tax_price, :delivery_price, :cash_on_delivery,
            to: :price_calculation, prefix: :calc
+
+  # TODO:validdationのクラスに書き出して共通化する
+  validate ->(cart) {
+    delivery_date_calculation = DeliveryDateCalculation.new
+    unless delivery_date_calculation.include?(cart.delivery_date)
+      errors.add(:delivery_date, 'が正しくありません')
+    end
+  }, on: :update
 
   def self.session_or_create(session)
     cart = find_by(id: session[SESSION_KEY])

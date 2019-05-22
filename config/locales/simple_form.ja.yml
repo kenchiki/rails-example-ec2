@@ -6,6 +6,8 @@ ja:
         update: 変更する
       order:
         create: 購入を確定する
+      cart:
+        update: 購入手続き
   simple_form:
     required:
       html: '<span class="badge badge-danger">必須</span>'

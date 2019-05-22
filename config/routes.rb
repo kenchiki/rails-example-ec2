@@ -5,7 +5,16 @@ Rails.application.routes.draw do
 
   namespace :my do
     resource :shipping_address, only: %i[new create]
-    resources :orders, only: %i[index show new create]
+    resource :cart, only: %i[edit update]
+    resources :orders, only: %i[index show] do
+      collection do
+        get :gateways
+        get :setup_purchase
+        get :purchase
+        get :cancel
+        post :ipn
+      end
+    end
   end
 
   namespace :admin do
