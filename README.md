@@ -1,5 +1,8 @@
 # ECサイト
 
+Rails製のショッピングカートです。
+[動作イメージ](http://nagai-galaxy.com/screenshot/rails-assignment-ec2.gif)
+
 ## 動作環境
 - ruby 2.6.0
 - rails 5.2.3
