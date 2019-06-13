@@ -18,7 +18,6 @@ jobs:
       - image: circleci/postgres:9.4
         environment:
           POSTGRES_USER: root
-          POSTGRES_DB: rails_rails_assignment_ec2_test
 
     working_directory: ~/repo
 
