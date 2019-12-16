@@ -94,7 +94,7 @@ GEM
       railties (>= 3.2, < 6.1)
     erubi (1.8.0)
     erubis (2.7.0)
-    excon (0.62.0)
+    excon (0.71.0)
     execjs (2.7.0)
     factory_bot (4.11.1)
       activesupport (>= 3.0.0)
@@ -260,6 +260,8 @@ GEM
       rspec-mocks (~> 3.8.0)
       rspec-support (~> 3.8.0)
     rspec-support (3.8.0)
+    rspec_junit_formatter (0.4.1)
+      rspec-core (>= 2, < 4, != 2.12.0)
     ruby-progressbar (1.10.0)
     ruby_dep (1.5.0)
     ruby_parser (3.13.1)
@@ -366,6 +368,7 @@ DEPENDENCIES
   rails (~> 5.2.3)
   rails_best_practices
   rspec-rails (~> 3.7)
+  rspec_junit_formatter
   sass-rails (~> 5.0)
   selenium-webdriver
   simple_form
