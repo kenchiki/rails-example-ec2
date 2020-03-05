@@ -1,0 +1,34 @@
+-# frozen_string_literal: true
+
+%h2 カート
+
+%table.table.table-striped
+  %thead
+    %tr
+      %th.w-25= t_model('product.name')
+      %th.w-25= t_model('product.price')
+      %th= t_model('cart_product.quantity')
+  %tbody
+    - current_cart.cart_products.each do |cart_product|
+      %tr
+        %td= cart_product.product.name
+        %td= price_unit(cart_product.product.price)
+        %td= cart_product.quantity
+
+= render 'layouts/cart_total'
+
+%h2 配送希望
+
+= simple_form_for([:my, @order]) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :delivery_time_detail_id, as: :select, collection: delivery_time_details, include_blank: false
+
+  .form-inputs
+    = f.input :delivery_date, as: :select, collection: delivery_dates, include_blank: false
+
+  .form-actions
+    = f.button :submit
+

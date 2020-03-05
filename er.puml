@@ -1,0 +1,79 @@
+@startuml
+
+entity "user" {
+  email
+  password
+  admin
+}
+
+entity "cash_on_delivery_detail" {
+  price
+  more_than
+}
+
+entity "cash_on_delivery" {
+}
+
+entity "delivery_price" {
+  price
+  per
+}
+
+entity "tax" {
+  rate
+}
+
+entity "cart" {
+}
+
+entity "cart_product" {
+  quantity
+}
+
+entity "order" {
+  delivery_time
+  delivery_date
+  total_with_tax
+}
+
+entity "order_detail" {
+  price
+  quantity
+}
+
+entity "delivery_time_detail" {
+  time
+}
+
+entity "product" {
+  name
+  image
+  price
+  description
+  published
+  position
+}
+
+entity "shipping_address" {
+  full_name
+  post
+  tel
+  address
+}
+
+cash_on_delivery--{cash_on_delivery_detail
+tax--{order
+cart--{cart_product
+delivery_price--{order
+product--{cart_product
+cash_on_delivery--{order
+user--{order
+order--{order_detail
+delivery_time_detail--{order
+delivery_time--{delivery_time_detail
+product--{order_detail
+cart--{order
+user--{shipping_address
+order--{shipping_address
+
+@enduml

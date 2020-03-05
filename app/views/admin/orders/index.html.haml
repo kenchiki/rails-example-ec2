@@ -1,0 +1,19 @@
+%h1 注文一覧
+
+%table.table.table-striped{'data-test': 'orders__index'}
+  %thead
+    %tr
+      %th ID
+      %th.w-25 注文日
+      %th.w-25 合計金額
+      %th
+
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= order.id
+        %td= l(order.created_at, format: :long)
+        %td= price_unit(order.total_with_tax)
+        %td= link_to '注文詳細', [:admin, order], class: 'btn btn-primary'
+
+= paginate @orders

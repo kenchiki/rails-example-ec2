@@ -1,0 +1,40 @@
+!!!
+%html{lang: "ja"}
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title さくらマーケット
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    #wrapper
+      %header#header
+        %p#header-logo= link_to('さくらマーケット', root_path)
+        %ul#header-nav
+          %li= link_to '買い物', products_path
+          %li= link_to 'カート', cart_products_path
+          - if user_signed_in?
+            %li.dropdown
+              = link_to 'ユーザー情報', '#', {class: 'dropdown-toggle', 'data-toggle': 'dropdown'}
+              .dropdown-menu
+                = link_to '注文一覧', my_orders_path, class: 'dropdown-item'
+                = link_to '配送情報編集', new_my_shipping_address_path, class: 'dropdown-item'
+                = link_to 'ログイン情報変更', edit_user_registration_path, class: 'dropdown-item'
+            - if current_user.admin?
+              %li.dropdown
+                = link_to '管理者用', '#', {class: 'dropdown-toggle', 'data-toggle': 'dropdown'}
+                .dropdown-menu
+                  = link_to '商品一覧管理', admin_products_path, class: 'dropdown-item'
+                  = link_to '代引き手数料編集', new_admin_cash_on_delivery_path, class: 'dropdown-item'
+                  = link_to '送料編集', new_admin_delivery_price_path, class: 'dropdown-item'
+                  = link_to '税率編集', new_admin_tax_path, class: 'dropdown-item'
+                  = link_to '配送希望時間編集', new_admin_delivery_time_path, class: 'dropdown-item'
+                  = link_to 'ユーザー一覧管理', admin_users_path, class: 'dropdown-item'
+                  = link_to '注文一覧管理', admin_orders_path, class: 'dropdown-item'
+            %li= link_to "ログアウト", destroy_user_session_path, method: :delete
+          - else
+            %li= link_to 'ログイン', new_user_session_path
+      #container
+        = render 'layouts/flash'
+        = yield

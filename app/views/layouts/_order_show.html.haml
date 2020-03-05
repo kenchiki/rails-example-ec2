@@ -1,0 +1,59 @@
+%div{'data-test': 'orders__show'}
+  %table.table.table-striped
+    %thead
+      %tr
+        %th.w-25= t_model('product.name')
+        %th.w-25= t_model('product.price')
+        %th= t_model('cart_product.quantity')
+    %tbody
+      - @order.order_details.order(id: :desc).each do |order_detail|
+        %tr
+          %td= order_detail.product.name
+          %td= price_unit(order_detail.price)
+          %td= order_detail.quantity
+
+  %h2 配送情報
+
+  %table.table.table-striped
+    %tbody
+      %tr
+        %th.w-25= t_model('order.delivery_date')
+        %td= l(@order.delivery_date, format: :long)
+      %tr
+        %th= t_model('order.delivery_time_detail_id')
+        %td= @order.delivery_time_detail.time
+      %tr
+        %th= t_model('shipping_address.full_name')
+        %td= @order.shipping_address.full_name
+      %tr
+        %th= t_model('shipping_address.post')
+        %td= @order.shipping_address.post
+      %tr
+        %th= t_model('shipping_address.tel')
+        %td= @order.shipping_address.tel
+      %tr
+        %th= t_model('shipping_address.address')
+        %td= @order.shipping_address.address
+
+  %h2 合計
+
+  %table.table.table-striped
+    %tbody
+      %tr
+        %th.w-25 商品合計
+        %td= price_unit(@order.calc_products_price)
+      %tr
+        %th 送料
+        %td= price_unit(@order.calc_delivery_price)
+      %tr
+        %th 代引き手数料
+        %td= price_unit(@order.calc_cash_on_delivery)
+      %tr
+        %th 合計（税抜き）
+        %td= price_unit(@order.calc_total_without_tax)
+      %tr
+        %th 消費税
+        %td= price_unit(@order.calc_tax_price)
+      %tr
+        %th 合計（税込）
+        %td= price_unit(@order.calc_total_with_tax)

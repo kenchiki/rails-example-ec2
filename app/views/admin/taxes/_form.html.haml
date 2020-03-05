@@ -1,0 +1,10 @@
+-# frozen_string_literal: true
+= simple_form_for([:admin,@tax], url: admin_tax_path, method: :post) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :rate, input_html: {type: 'number'}, as: :append_text, append: '%'
+
+  .form-actions
+    = f.button :submit

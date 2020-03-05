@@ -1,0 +1,4 @@
+.form-inputs.nested-fields
+  = f.input :price, input_html: {type: 'number'}, as: :append_text, append: '円'
+  = f.input :more_than, input_html: {type: 'number'}, as: :append_text, append: '円以上'
+  = link_to_remove_association '削除', f

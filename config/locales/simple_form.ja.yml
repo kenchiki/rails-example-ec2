@@ -1,0 +1,13 @@
+ja:
+  helpers:
+    submit:
+      cart_product:
+        create: 追加する
+        update: 変更する
+      order:
+        create: 購入を確定する
+  simple_form:
+    required:
+      html: '<span class="badge badge-danger">必須</span>'
+    error_notification:
+      default_message: '以下の問題を確認してください。'

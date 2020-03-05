@@ -1,0 +1,13 @@
+-# frozen_string_literal: true
+= simple_form_for([:admin, @delivery_price], url: admin_delivery_price_path, method: :post) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :price, input_html: {type: 'number'}, as: :append_text, append: '円'
+
+  .form-inputs
+    = f.input :per, input_html: {type: 'number'}, as: :append_text, append: '個毎'
+
+  .form-actions
+    = f.button :submit

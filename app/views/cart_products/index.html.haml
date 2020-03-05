@@ -1,0 +1,27 @@
+%h1 カート
+
+- if @cart_products.empty?
+  %p カートは空です。
+
+- else
+  %table.table.table-striped
+    %thead
+      %tr
+        %th.w-25= t_model('product.name')
+        %th.w-25= t_model('product.price')
+        %th.w-25= t_model('cart_product.quantity')
+        %th
+    %tbody
+      - @cart_products.each do |cart_product|
+        %tr
+          %td= cart_product.product.name
+          %td= price_unit(cart_product.product.price)
+          %td= cart_product.quantity
+          %td.btns
+            = link_to '詳細', new_product_cart_product_path(cart_product.product), class: 'btn btn-primary'
+            = link_to '編集', edit_product_cart_product_path(cart_product.product, cart_product), class: 'btn btn-primary'
+            = link_to '削除', [cart_product.product, cart_product], method: :delete, data: { confirm: '本当に実行しますか？' }, class: 'btn btn-danger'
+
+  = render 'layouts/cart_total'
+
+  = link_to '注文確認に進む', new_my_order_path, class: 'btn btn-primary'

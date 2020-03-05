@@ -1,24 +1,49 @@
-# README
+# ECサイト
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Rails製のショッピングカートです。
+[動作イメージ](https://nagai-galaxy.com/screenshot/rails-assignment-ec2.gif)
 
-Things you may want to cover:
+## 動作環境
+- ruby 2.6.0
+- rails 5.2.3
 
-* Ruby version
+## 管理者設定方法
+`rails administrator:become USER_ID=1`
 
-* System dependencies
+## デモ用データ作成
+`rails sample:create_demo`
 
-* Configuration
+# 本番環境で設定する環境変数
+```ruby
+# herokuでは○○.herokuapp.comを設定
+ACTION_MAILER_DOMAIN
 
-* Database creation
+# herokuでは○○.herokuapp.comを設定
+ACTION_MAILER_HOST
 
-* Database initialization
+# herokuでは設定不要（未設定の場合、ENV['ACTION_MAILER_PORT']はnilになる）
+ACTION_MAILER_PORT
 
-* How to run the test suite
+# herokuのSENDGRIDプラグインで自動で設定される
+SENDGRID_USERNAME
 
-* Services (job queues, cache servers, search engines, etc.)
+# herokuのSENDGRIDプラグインで自動で設定される
+SENDGRID_PASSWORD
 
-* Deployment instructions
+# awsの設定
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_REGION
+AWS_HOST
+AWS_ENDPOINT
+AWS_BUCKET
 
-* ...
+# メールアドレス送信時のFROM
+EMAIL_FROM
+
+# デモadminユーザーパスワード（必要であれば）
+DEMO_ADMIN_USER_PASSWORD
+
+# デモユーザーパスワード（必要であれば）
+DEMO_USER_PASSWORD
+```
